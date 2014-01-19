@@ -30,16 +30,19 @@
     ],
 
     "shutdown_command": "echo 'vagrant'|sudo -S /sbin/halt -h -p"
+  }, {
+    "type" : "amazon-ebs",
+    "ami_name": "CentOS-6.5-x86_64 {{timestamp}}",
+    "source_ami": "ami-b158c981",
+    "instance_type": "t1.micro",
+    "region": "us-west-2",
+    "ssh_username": "root",
+    "ssh_timeout": "5m"
   }],
-  "post-processors": [{
-    "type": "vagrant"
-  }],
+  
   "provisioners": [{
     "type": "shell",
-    "execute_command": "echo 'vagrant' | {{.Vars}} sudo -S -E bash '{{.Path}}'",
     "scripts": [
-      "scripts/vagrant.sh",
-      "scripts/vboxguest.sh",
       "scripts/init.sh"
     ]
   }]
